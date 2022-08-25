@@ -1,94 +1,107 @@
 export const appConst = {
-  htmlStr:
-    '<html lang="en">\n' +
-    '  <head>\n' +
-    '    <meta charset="UTF-8" />\n' +
-    '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n' +
-    '    <title>HTML5 Fullscreen Video Autoplay Background</title>\n' +
-    '\n' +
-    '    <style>\n' +
-    '      html,\n' +
-    '      body {\n' +
-    '        margin: 0;\n' +
-    '        height: 100%;\n' +
-    '        overflow: hidden;\n' +
-    '      }\n' +
-    '      #background-con img{\n' +
-    '        width: 100%;\n' +
-    '        height: auto;\n' +
-    '      }\n' +
-    '    </style>\n' +
-    '  </head>\n' +
-    '  <body>\n' +
-    '    <div id="background-con" onclick="myFunction()"></div>\n' +
-    '\n' +
-    '    <div id="video-elem"></div>\n' +
-    '    <script>\n' +
-    '      var backgroundContainer = document.getElementById("background-con");\n' +
-    '      var elem = document.getElementById("video-elem");\n' +
-    '\n' +
-    '      var thumbnailSrc = "https://dev.breeze.com.sg/app/tutorial/thumbnail_parking.png";\n' +
-    '      var imageElem = document.createElement("img");\n' +
-    '      imageElem.setAttribute("src", thumbnailSrc);\n' +
-    '      backgroundContainer.appendChild(imageElem);\n' +
-    '\n' +
-    '      var video;\n' +
-    '\n' +
-    '      function openFullscreen() {\n' +
-    '        video = document.createElement("video");\n' +
-    '        var source = document.createElement("source");\n' +
-    '        var videoSource = "https://dev.breeze.com.sg/app/tutorial/parking.mp4";\n' +
-    '        source.setAttribute("src", videoSource);\n' +
-    '        source.setAttribute("type", "video/mp4");\n' +
-    '        video.appendChild(source);video.width= 300;video.height= 300;\n' +
-    '\n' +
-    '        elem.appendChild(video);\n' +
-    '\n' +
-    '        if (video.requestFullscreen) {\n' +
-    '          video.requestFullscreen();\n' +
-    '        } else if (video.webkitRequestFullscreen) {\n' +
-    '          /* Safari */\n' +
-    '          video.webkitRequestFullscreen();\n' +
-    '        } else if (video.msRequestFullscreen) {\n' +
-    '          /* IE11 */\n' +
-    '          video.msRequestFullscreen();\n' +
-    '        }\n' +
-    '        video.load();\n' +
-    '        video.play();\n' +
-    '      }\n' +
-    '\n' +
-    '      document.addEventListener(\n' +
-    '        "fullscreenchange",\n' +
-    '        function () {\n' +
-    '          if (!document.fullscreen) {\n' +
-    '            video.remove();\n' +
-    '          }\n' +
-    '        },\n' +
-    '        false\n' +
-    '      );\n' +
-    '      document.addEventListener(\n' +
-    '        "mozfullscreenchange",\n' +
-    '        function () {\n' +
-    '          if (!document.mozFullScreen) {\n' +
-    '            video.remove();\n' +
-    '          }\n' +
-    '        },\n' +
-    '        false\n' +
-    '      );\n' +
-    '      document.addEventListener(\n' +
-    '        "webkitfullscreenchange",\n' +
-    '        function () {\n' +
-    '          if (!document.webkitIsFullScreen) {\n' +
-    '            video.remove();\n' +
-    '          }\n' +
-    '        },\n' +
-    '        false\n' +
-    '      );\n' +
-    '\n' +
-    '      function myFunction() {\n' +
-    '        openFullscreen();\n' +
-    '      }\n' +
-    '    </script>\n' +
-    '  </body>\n' +
-    '</html>',
-};
+  htmlStr: `
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>HTML5 Fullscreen Video Autoplay Background</title>
+  
+      <style>
+        html,
+        body {
+          margin: 0;
+          height: 100%;
+          overflow: hidden;
+        }
+        #background-con img{
+          width: 400px;
+          height: 400px;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="background-con" onclick="myFunction()">
+      <h1>background</h1> </div>
+  
+      <div id="video-elem">
+      <h1>video</h1>
+      </div>
+      <h1>Hello</h1>
+    </body>
+  </html>  
+  `,
+  jsScript: `
+  window.ReactNativeWebView.postMessage("got js");
+
+  var backgroundContainer = document.getElementById("background-con");
+  var elem = document.getElementById("video-elem");
+
+  var thumbnailSrc = "https://dev.breeze.com.sg/app/tutorial/thumbnail_parking.png";
+  var imageElem = document.createElement("img");
+  imageElem.setAttribute("src", thumbnailSrc);
+  backgroundContainer.appendChild(imageElem);
+  window.ReactNativeWebView.postMessage(document.getElementsByTagName('img')[0].src);
+  setTimeout(() =>{
+    window.ReactNativeWebView.postMessage(document.getElementsByTagName('img')[0].src);
+  }, 500)
+
+
+  var video;
+  window.ReactNativeWebView.postMessage("after video");
+
+  function openFullscreen() {
+    video = document.createElement("video");
+    var source = document.createElement("source");
+    var videoSource = "https://dev.breeze.com.sg/app/tutorial/parking.mp4";
+    source.setAttribute("src", videoSource);
+    source.setAttribute("type", "video/mp4");
+    video.appendChild(source);
+
+    elem.appendChild(video);
+
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      /* Safari */
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      /* IE11 */
+      video.msRequestFullscreen();
+    }
+    video.load();
+    video.play();
+  }
+
+  document.addEventListener(
+    "fullscreenchange",
+    function () {
+      if (!document.fullscreen) {
+        video.remove();
+      }
+    },
+    false
+  );
+  document.addEventListener(
+    "mozfullscreenchange",
+    function () {
+      if (!document.mozFullScreen) {
+        video.remove();
+      }
+    },
+    false
+  );
+  document.addEventListener(
+    "webkitfullscreenchange",
+    function () {
+      if (!document.webkitIsFullScreen) {
+        video.remove();
+      }
+    },
+    false
+  );
+
+  function myFunction() {
+    openFullscreen();
+  }
+  `,
+}
