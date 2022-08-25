@@ -14,19 +14,15 @@ export const appConst = {
           overflow: hidden;
         }
         #background-con img{
-          width: 400px;
-          height: 400px;
+          width: 100%;
+          height: auto;
         }
       </style>
     </head>
     <body>
-      <div id="background-con" onclick="myFunction()">
-      <h1>background</h1> </div>
-  
+      <div id="background-con"></div>
       <div id="video-elem">
-      <h1>video</h1>
       </div>
-      <h1>Hello</h1>
     </body>
   </html>  
   `,
@@ -40,16 +36,13 @@ export const appConst = {
   var imageElem = document.createElement("img");
   imageElem.setAttribute("src", thumbnailSrc);
   backgroundContainer.appendChild(imageElem);
-  window.ReactNativeWebView.postMessage(document.getElementsByTagName('img')[0].src);
-  setTimeout(() =>{
-    window.ReactNativeWebView.postMessage(document.getElementsByTagName('img')[0].src);
-  }, 500)
-
+  backgroundContainer.addEventListener("click", myFunction);
 
   var video;
   window.ReactNativeWebView.postMessage("after video");
 
   function openFullscreen() {
+    window.ReactNativeWebView.postMessage("open full screen");
     video = document.createElement("video");
     var source = document.createElement("source");
     var videoSource = "https://dev.breeze.com.sg/app/tutorial/parking.mp4";
@@ -101,6 +94,7 @@ export const appConst = {
   );
 
   function myFunction() {
+    window.ReactNativeWebView.postMessage("open full screen");
     openFullscreen();
   }
   `,

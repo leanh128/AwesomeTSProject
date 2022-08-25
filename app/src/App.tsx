@@ -8,28 +8,29 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <View style={{ height: (deviceWidth / 424) * 148, flex: 0, marginBottom: 24 }}> */}
-        <WebView
-          onMessage={event => {
-            console.log('leon', 'App.tsx [20] saysome: event.nativeEvent.data = ', event.nativeEvent.data)
-          }}
-          onError={e => {
-            console.log('leon', 'App.tsx [18] onError: e = ', e)
-          }}
-          onHttpError={e => {
-            console.log('leon', 'App.tsx [19] onHttpError: ', e)
-          }}
-          originWhitelist={['*']}
-          androidHardwareAccelerationDisabled={true}
-          allowsFullscreenVideo={true}
-          injectedJavaScript={appConst.jsScript}
-          cacheEnabled={false}
-          // scrollEnabled={false}
-          mediaPlaybackRequiresUserAction={false}
-          source={{
-            // uri: 'https://survey.breeze.com.sg/survey.html',
-            html: appConst.htmlStr,
-          }}
-        />
+      <WebView
+        onMessage={event => {
+          console.log('leon', 'App.tsx [20] saysome: event.nativeEvent.data = ', event.nativeEvent.data)
+        }}
+        onError={e => {
+          console.log('leon', 'App.tsx [18] onError: e = ', e)
+        }}
+        onHttpError={e => {
+          console.log('leon', 'App.tsx [19] onHttpError: ', e)
+        }}
+        originWhitelist={['*']}
+        androidHardwareAccelerationDisabled={true}
+        allowsFullscreenVideo={true}
+        injectedJavaScript={appConst.jsScript}
+        // injectedJavaScriptForMainFrameOnly={false}
+        cacheEnabled={false}
+        scrollEnabled={false}
+        mediaPlaybackRequiresUserAction={false}
+        source={{
+          // uri: 'https://survey.breeze.com.sg/survey.html',
+          html: appConst.htmlStr,
+        }}
+      />
       {/* </View> */}
     </SafeAreaView>
   )
